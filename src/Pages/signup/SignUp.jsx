@@ -15,7 +15,7 @@ export function SignUp() {
         <form>
           <div className="flex flex-col gap-6">
             <div className="grid gap-2">
-              <Label htmlFor="firstname">First Name</Label>
+              <Label id="firstname">First Name</Label>
               <Input
                 id="firstname"
                 type="firstname"
@@ -24,7 +24,7 @@ export function SignUp() {
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="lastname">Last Name</Label>
+              <Label id="lastname">Last Name</Label>
               <Input
                 id="lastname"
                 type="lastname"
@@ -34,7 +34,7 @@ export function SignUp() {
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
+              <Label id="email">Email</Label>
               <Input
                 id="email"
                 type="email"
@@ -43,7 +43,7 @@ export function SignUp() {
             </div>
 
              <div className="grid gap-2">
-              <Label htmlFor="password">Password</Label>
+              <Label id="password">Password</Label>
               <Input
                 id="password"
                 type="password"

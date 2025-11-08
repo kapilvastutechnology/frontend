@@ -16,7 +16,7 @@ export function Login() {
           <div className="flex flex-col gap-6">
           
             <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
+              <Label id="email">Email</Label>
               <Input
                 id="email"
                 type="email"
@@ -25,7 +25,7 @@ export function Login() {
             </div>
 
              <div className="grid gap-2">
-              <Label htmlFor="password">Password</Label>
+              <label id="password">Password</label>
               <Input
                 id="password"
                 type="password"
