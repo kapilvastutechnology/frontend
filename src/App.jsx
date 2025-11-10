@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router"
 import RootLayout from "./components/RootLayout"
-import { SignUp } from "./Pages/signup/SignUp"
-import { Login } from "./Pages/login/Login"
+import Home from "./features/home/Home"
+import Login from "./features/authentication/Login"
 export default function App() {
 
   const router = createBrowserRouter([
@@ -10,13 +10,13 @@ export default function App() {
       element: <RootLayout/>,
       children: [
        {
-        path: 'signup',
-        element: <SignUp/>
+        index: true,
+        element: <Home/>
        },
-        {
-          path: 'login',
-          element: <Login/>
-        }
+       {
+        path: 'login',
+        element: <Login/>
+       }
       ]
     }
   ])

@@ -1,27 +1,18 @@
-import { NavigationMenu } from "@radix-ui/react-navigation-menu";
+import { NavLink } from "react-router";
 import { Button } from "./ui/button";
-import { IoLogoBuffer } from "react-icons/io";
-import { NavLink } from "react-router-dom";
+import DropDownProfile from "./ui/DropDownProfile";
+
 export default function Header() {
-  return (
-    <header className="bg-black text-white shadow-md">
-      <NavigationMenu className="flex items-center justify-between px-4 py-3 w-full mx-auto">
- 
-        <div className="text-3xl font-bold ">
-          <a href="#" ><IoLogoBuffer/></a>
+    return (
+        <div className="bg-gray-200 px-5 py-[7px] flex justify-between items-base" >
+            <h1 className="text-[30px] font-bold" >Shopal</h1>
+            <div className="space-x-5" >
+                <NavLink to={'/login'}>
+                <Button variant= "link" className={'text-[16px'} >Login</Button>
+                </NavLink>
+                <Button>Sign Up</Button>
+            </div>
+            {/* <DropDownProfile/> */}
         </div>
-
-        <div className="flex gap-3">
-          <Button className="bg-gradient from-blue-500 to-indigo-500 text-white hover:from-blue-600 hover:to-indigo-600">
-            <NavLink to={'/signup'} >SingUp</NavLink>
-           </Button>
-
-          <Button className="border-2 border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-white">
-            <NavLink to={'/login'} >Login</NavLink>
-            
-          </Button>
-        </div>
-      </NavigationMenu>
-    </header>
-  );
+    )
 }
