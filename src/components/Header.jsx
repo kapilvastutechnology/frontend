@@ -1,6 +1,6 @@
 import { NavLink } from "react-router";
 import { Button } from "./ui/button";
-import DropDownProfile from "./ui/DropDownProfile";
+// import DropDownProfile from "./ui/DropDownProfile";
 
 export default function Header() {
     return (
@@ -10,7 +10,10 @@ export default function Header() {
                 <NavLink to={'/login'}>
                 <Button variant= "link" className={'text-[16px'} >Login</Button>
                 </NavLink>
-                <Button>Sign Up</Button>
+                
+                <NavLink to={'/signup'}>
+                <Button variant= "link" className={'text-[16px'} >Sign Up</Button>
+                </NavLink>
             </div>
             {/* <DropDownProfile/> */}
         </div>
