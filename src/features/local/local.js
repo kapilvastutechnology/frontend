@@ -9,3 +9,7 @@ export const getUserFromLocal = () =>{
     return user ? JSON.parse(user) : null
 }
 
+
+export const removeUserFromLocal = () => {
+    localStorage.clear();
+}

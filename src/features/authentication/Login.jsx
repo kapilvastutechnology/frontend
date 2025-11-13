@@ -13,10 +13,12 @@ import { useNavigate } from "react-router"
 import { useUserLoginMutation } from "./authApi"
 import { Formik } from "formik"
 import * as Yup from 'yup'
+import toast from "react-hot-toast"
 import { LockKeyhole, LockKeyholeOpenIcon, } from "lucide-react"
 import { useState } from "react"
-import { Spinner } from "@/components/ui/spinner"
-import toast from "react-hot-toast"
+import { Spinner } from "../../components/ui/spinner"
+import { useDispatch } from "react-redux"
+import { setUser } from "../user/userSlice"
 
 const loginShcema = Yup.object({
   email: Yup.string().email().required(),
@@ -26,6 +28,7 @@ const loginShcema = Yup.object({
 export default function Login() {
   const nav = useNavigate();
   const [show, setShow] = useState(false);
+  const dispatch = useDispatch();
   const [loginUser, { isLoading }] = useUserLoginMutation();
   return (
     <div className="p-5">
@@ -49,8 +52,9 @@ export default function Login() {
             onSubmit={async (val) => {
               try {
                 const response = await loginUser(val).unwrap();
-                toast.success('Login successfully');
-
+                toast.success('Login successful');
+                dispatch(setUser(response.data));
+                nav(-1);
               } catch (err) {
                 toast.error(err.data.data);
               }
@@ -118,6 +122,7 @@ export default function Login() {
                   Login
                 </Button>}
 
+
               </form>
             )}
           </Formik>
@@ -128,3 +133,5 @@ export default function Login() {
     </div >
   )
 }
+
+
