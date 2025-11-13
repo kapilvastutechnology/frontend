@@ -1,6 +1,4 @@
 import { mainApi } from "@/app/mainApi";
-
-
 export const  productApi = mainApi.injectEndpoints({
     endpoints: (builder) =>({
         getProducts: builder.query({
@@ -41,3 +39,7 @@ export const  productApi = mainApi.injectEndpoints({
         }),
     })
 })
+
+
+export const {useGetProductsQuery, useGetProductQuery, useCreateProductMutation,
+     useUpdateProductMutation, useDeleteProductMutation} = productApi;
