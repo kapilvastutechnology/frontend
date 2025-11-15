@@ -1,21 +1,27 @@
 import { base } from "@/app/mainApi";
 import { useGetProductsQuery } from "../products/productApi"
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 
 import { EditIcon, TrashIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router";
 
 
 export default function AdminPanel() {
-
+  const nav = useNavigate();
   const { isLoading, error, data } = useGetProductsQuery();
-
+  console.log(data);
   if (isLoading) return <h1>Loading...</h1>
   if (error) return <h1 className="text-pink-950">{error}</h1>
   return (
     <div className="p-5">
-
+      
+      <div className="mb-4" >
+        <Button 
+        onClick={() => nav('/product-add')}
+        className={'bg-green-700'} >Add Product</Button>
+      </div>
 
       <div className='w-full'>
         <div className='[&>div]:rounded-sm [&>div]:border'>
