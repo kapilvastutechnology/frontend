@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -6,158 +5,204 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
 import { Formik } from "formik"
-import * as Yup from "yup";
+import * as Yup from 'yup'
+import toast from "react-hot-toast"
+import { useSelector } from "react-redux"
+import { useNavigate } from "react-router"
+import { useCreateProductMutation } from "../products/productApi"
+import { Textarea } from "@/components/ui/textarea"
+import { Spinner } from "@/components/ui/spinner"
 
-const valschema = Yup.object().shape({
-  title: Yup.string().required(),
-  detail: Yup.string().required(),
-  price: Yup.number().required(),
+
+const valSchema = Yup.object({
+  title: Yup.string().min(4).required(),
+  detail: Yup.string().min(10).required(),
+  price: Yup.string().required(),
   category: Yup.string().required(),
   brand: Yup.string().required(),
   image: Yup.mixed()
-  .test('fileType', 'Unsupported File Format', (val) => {
-    return val && val.si;
-  })
-  .test('fileSize', 'File size is too large', (value) => {
-    return value && value.size <= 1000000;
-  }),
+    .test('fileType', 'Unsupported File Format', (val) => {
+      return val && ['image/jpeg', 'image/png', 'image/jpg', 'image/gif'].includes(val.type);
+    })
+    .test('fileSize', 'file is too large', (val) => {
+      return val && val.size <= 5 * 1024 * 1024;
+    })
+    .required(),
 });
 
 export default function ProductAddForm() {
+
+  const nav = useNavigate();
+
+  const { user } = useSelector((state) => state.userSlice);
+
+  const [addProduct, { isLoading }] = useCreateProductMutation();
   return (
-    
-    <Card className="w-full max-w-sm ">
-      <CardHeader>
-        <CardTitle>Product Create</CardTitle>
-      </CardHeader>
-      <CardContent>
+    <div>
 
-        <Formik
-        initialValues={{
-            title: '',
-            detail: '',
-            price: '',
-            category: '',
-            brand: '',
-            image: '',
-            imageReview: ''
-        }}
+      <Card className="w-full max-w-sm">
+        <CardHeader>
+          <CardTitle>Product Create</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Formik
+            initialValues={{
+              title: '',
+              detail: '',
+              price: '',
+              category: '',
+              brand: '',
+              image: '',
+              imageReview: '',
+            }}
 
-        onSubmit={(val)=>{
-            console.log(val);
-        }}
+            onSubmit={async (val) => {
+              try {
+                const formData = new FormData();
+                formData.append('title', val.title);
+                formData.append('detail', val.detail);
+                formData.append('price', val.price);
+                formData.append('category', val.category);
+                formData.append('brand', val.brand);
+                formData.append('image', val.image);
+                await addProduct({
+                  token: user.token,
+                  body: formData
+                }).unwrap();
+                toast.success('Product added successfully');
+                nav(-1);
+              } catch (err) {
+                toast.error(err.data.message);
+              }
 
-        validationSchema={valschema}
-        >
-            {({handleChange,handleSubmit, touched, errors, setFieldValue, values})=>(
-                <form
-                onSubmit={handleSubmit}
-                >
-          <div className="flex flex-col gap-6">
-            <div className="grid gap-2">
-              <Label htmlFor="title">Title</Label>
-              <Input
-                name="title"
-                onChange={handleChange}
-                value={values.title}
-                id="title"
-                type="title"
-                placeholder="Product title"
-              />
-            {touched.title && errors.title && <p>{errors.title}</p>}
-            </div>
+            }} validationSchema={valSchema}
+          >
+            {({ handleChange, handleSubmit, errors, touched, setFieldValue, values }) => (
+              <form onSubmit={handleSubmit}>
+                <div className="flex flex-col gap-6">
 
-            <div className="grid gap-2">
-              <Label htmlFor="detail">Detail</Label>
-              <Textarea
-                name="detail"
-                onChange={handleChange}
-                value={values.detail}
-                id="detail"
-                type="text"
-                placeholder="Product detail"
-              />
-            </div>
+                  <div className="grid gap-2">
+                    <Label htmlFor="title">Title</Label>
+                    <Input
+                      name="title"
+                      onChange={handleChange}
+                      value={values.title}
+                      id="title"
+                      type="text"
+                      placeholder="product title"
+                    />
+                    {touched.title && errors.title && <p className="text-red-500">{errors.title}</p>}
+                  </div>
 
-            <div className="grid gap-2">
-              <Label htmlFor="price">Price</Label>
-              <Input
-               name="price"
-               onChange={handleChange}
-               value={values.price}
-                id="price"
-                type="Number"
-                placeholder="Product price"
-              />
-            </div>
+                  <div className="grid gap-2">
+                    <Label htmlFor="detail">Detail</Label>
+                    <Textarea
+                      name="detail"
+                      onChange={handleChange}
+                      value={values.detail}
+                      id="detail"
+                      type="text"
+                      placeholder="product detail"
+                    />
+                    {touched.detail && errors.detail && <p className="text-red-500">{errors.detail}</p>}
+                  </div>
 
-               <Select
-               name="category"
-               onValueChange={(value)=>{
-                setFieldValue('category', value);
-               }}
-               >
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select a Category" />
-                </SelectTrigger>
-                <SelectContent>
+                  <div className="grid gap-2">
+                    <Label htmlFor="price">Price</Label>
+                    <Input
+                      name="price"
+                      onChange={handleChange}
+                      value={values.price}
+                      id="price"
+                      type="number"
+                      placeholder="product price"
+                    />
+                    {touched.price && errors.price && <p className="text-red-500">{errors.price}</p>}
+                  </div>
 
-                  <SelectGroup>
-                    <SelectItem value="food">Food</SelectItem>
-                    <SelectItem value="clothes">Clothes</SelectItem>
-                    <SelectItem value="tech">Tech</SelectItem>
-                    <SelectItem value=" Jewallery">Jewallery</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-
-
-             <Select
-             name="brand"
-             onValueChange={(value)=>{
-              setFieldValue('brand', value);
-             }}
-             >
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select a Brand" />
-                </SelectTrigger>
-                <SelectContent>
-
-                  <SelectGroup>
-                    <SelectItem value="addidas">Addidas</SelectItem>
-                    <SelectItem value="samsung">Samsung</SelectItem>
-                    <SelectItem value="realme">Realme</SelectItem>
-                    <SelectItem value=" nokia">Nokia</SelectItem>
-                    <SelectItem value=" iphone">Iphone</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-
-            <div className="grid gap-2">
-              <Label htmlFor="image">Image</Label>
-              <Input
-                 name="image"
-                 onChange={handleChange}
-                 value={values.image}
-                id="image"
-                type="file"
-              />
-            </div>
+                  <Select
+                    name="category"
+                    onValueChange={(value) => setFieldValue('category', value)}
+                  >
+                    <SelectTrigger
+                      className="w-full">
+                      <SelectValue placeholder="Select a Category" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectItem value="food">Food</SelectItem>
+                        <SelectItem value="clothes">Clothes</SelectItem>
+                        <SelectItem value="tech">Tech</SelectItem>
+                        <SelectItem value="jewellery">Jewellery</SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                    {touched.category && errors.category && <p className="text-red-500">{errors.category}</p>}
+                  </Select>
 
 
-        <Button type="submit" className="w-full">
-          Submit
-        </Button>
-          </div>
-        </form>
+                  <Select
+                    name="brand"
+                    onValueChange={(value) => setFieldValue('brand', value)}
+                  >
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select a brand" />
+                    </SelectTrigger>
+                    <SelectContent>
+
+                      <SelectGroup>
+                        <SelectItem value="addidas">Addidas</SelectItem>
+                        <SelectItem value="samsung">Samsung</SelectItem>
+                        <SelectItem value="tanishq">Tanishq</SelectItem>
+                        <SelectItem value="kfc">Kfc</SelectItem>
+                        <SelectItem value="iphone">Iphone</SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                    {touched.brand && errors.brand && <p className="text-red-500">{errors.brand}</p>}
+                  </Select>
+
+
+                  <div className="grid gap-2">
+                    <Label htmlFor="image">Select an image</Label>
+                    <Input
+                      name="image"
+                      onChange={(e) => {
+                        const file = e.target.files[0];
+                        setFieldValue('imageReview', URL.createObjectURL(file));
+                        setFieldValue('image', file);
+                      }}
+
+                      id="image"
+                      type="file"
+
+                    />
+                    {touched.image && errors.image && <p className="text-red-500">{errors.image}</p>}
+                    {values.imageReview && !errors.image && <img src={values.imageReview} alt="" />}
+                  </div>
+
+                  {isLoading ? <Button size="sm" variant="outline" disabled className="w-full mt-5">
+                    <Spinner />
+                    Submit
+                  </Button> : <Button type="submit" className="w-full mt-5">
+                    Submit
+                  </Button>}
+
+                </div>
+              </form>
             )}
-        </Formik>
-      </CardContent>
-    </Card>
+          </Formik>
+        </CardContent>
+      </Card>
+    </div>
   )
 }

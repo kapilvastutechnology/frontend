@@ -5,7 +5,8 @@ export const  productApi = mainApi.injectEndpoints({
             query: () => ({
                 url: '/products',
                 method: 'GET'
-            })
+            }),
+            providesTags: ['Product']
         }),
 
         getProduct: builder.query({
@@ -16,11 +17,15 @@ export const  productApi = mainApi.injectEndpoints({
         }),
 
         createProduct: builder.mutation({
-            query: (body) => ({
+            query: (data) => ({
                 url: '/products',
                 method: 'POST',
-                body: body
-            })
+                headers: {
+                    Authorization:data.token
+                },
+                body: data.body
+            }),
+            invalidatesTags: ['Product']
         }),
         
 
