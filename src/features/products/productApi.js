@@ -22,6 +22,7 @@ export const  productApi = mainApi.injectEndpoints({
                 body: body
             })
         }),
+        
 
         updateProduct: builder.mutation({
             query: (body) => ({

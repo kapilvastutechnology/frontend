@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -10,6 +11,22 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { Formik } from "formik"
+import * as Yup from "yup";
+
+const valschema = Yup.object().shape({
+  title: Yup.string().required(),
+  detail: Yup.string().required(),
+  price: Yup.number().required(),
+  category: Yup.string().required(),
+  brand: Yup.string().required(),
+  image: Yup.mixed()
+  .test('fileType', 'Unsupported File Format', (val) => {
+    return val && val.si;
+  })
+  .test('fileSize', 'File size is too large', (value) => {
+    return value && value.size <= 1000000;
+  }),
+});
 
 export default function ProductAddForm() {
   return (
@@ -35,7 +52,7 @@ export default function ProductAddForm() {
             console.log(val);
         }}
 
-        
+        validationSchema={valschema}
         >
             {({handleChange,handleSubmit, touched, errors, setFieldValue, values})=>(
                 <form
