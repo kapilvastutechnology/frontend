@@ -51,12 +51,12 @@ export default function AdminPanel() {
                   <TableCell>{item._id}</TableCell>
                   <TableCell>{item.createdAt}</TableCell>
                   <TableCell>
-                    <Button >
+                    <Button onClick={() => nav(`/product-edit/${item._id}`)}   >
                       <EditIcon />
                     </Button>
                   </TableCell>
                   <TableCell >
-                    <RemoveProduct/>
+                    <RemoveProduct id={item._id} />
                   </TableCell>
                 </TableRow>
               ))}
