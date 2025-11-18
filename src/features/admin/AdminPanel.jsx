@@ -3,9 +3,10 @@ import { useGetProductsQuery } from "../products/productApi"
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 
-import { EditIcon, TrashIcon } from "lucide-react";
+import { EditIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router";
+import { RemoveProduct } from "./RemoveProduct";
 
 
 export default function AdminPanel() {
@@ -55,9 +56,7 @@ export default function AdminPanel() {
                     </Button>
                   </TableCell>
                   <TableCell >
-                    <Button className={'bg-red-700'}>
-                      <TrashIcon />
-                    </Button>
+                    <RemoveProduct/>
                   </TableCell>
                 </TableRow>
               ))}
