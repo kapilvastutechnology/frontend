@@ -40,7 +40,8 @@ export const  productApi = mainApi.injectEndpoints({
                     Authorization:data.token
                 },
                 body:data.body
-            })
+            }),
+            invalidatesTags: ['Product']
         }),
 
         removeProduct: builder.mutation({

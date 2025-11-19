@@ -22,7 +22,8 @@ import { useNavigate } from "react-router"
 import { Spinner } from "@/components/ui/spinner"
 import { Textarea } from "@/components/ui/textarea"
 import { base } from "@/app/mainApi"
-import { useCreateProductMutation } from "../products/productApi"
+import { useUpdateProductMutation } from "../products/productApi"
+import toast from "react-hot-toast"
 
 
 const valSchema = Yup.object({
@@ -48,7 +49,7 @@ export default function ProductEditForm({ product }) {
 
   const { user } = useSelector((state) => state.userSlice);
 
-  const [addProduct, { isLoading }] = useCreateProductMutation();
+  const [updateProduct, { isLoading }] = useUpdateProductMutation();
   return (
     <div>
 
@@ -69,23 +70,26 @@ export default function ProductEditForm({ product }) {
             }}
 
             onSubmit={async (val) => {
-              // try {
-              //   const formData = new FormData();
-              //   formData.append('title', val.title);
-              //   formData.append('detail', val.detail);
-              //   formData.append('price', val.price);
-              //   formData.append('category', val.category);
-              //   formData.append('brand', val.brand);
-              //   formData.append('image', val.image);
-              //   await addProduct({
-              //     token: user.token,
-              //     body: formData
-              //   }).unwrap();
-              //   toast.success('Product added successfully');
-              //   nav(-1);
-              // } catch (err) {
-              //   toast.error(err.data.message);
-              // }
+              try {
+                const formData = new FormData();
+                formData.append('title', val.title);
+                formData.append('detail', val.detail);
+                formData.append('price', val.price);
+                formData.append('category', val.category);
+                formData.append('brand', val.brand);
+                if (val.image){
+                    formData.append('image', val.image);
+                }
+                await updateProduct({
+                  token: user.token,
+                  body: formData,
+                  id: product._id
+                }).unwrap();
+                toast.success('Product updated successfully');
+                nav(-1);
+              } catch (err) {
+                toast.error(err.data.message);
+              }
 
             }} validationSchema={valSchema}
           >
