@@ -1,28 +1,91 @@
-import { NavLink } from "react-router";
-import { Button } from "./ui/button";
-import DropDownProfile from "./ui/DropDownProfile";
-import { useSelector } from "react-redux";
+// import { PencilLineIcon, UploadIcon, Trash2Icon } from 'lucide-react'
+
+// import {
+//   DropdownMenu,
+//   DropdownMenuContent,
+//   DropdownMenuSeparator,
+//   DropdownMenuGroup,
+//   DropdownMenuItem,
+//   DropdownMenuTrigger
+// } from '@/components/ui/dropdown-menu'
+// import { Button } from './ui/button'
+
+// export default function  Header(){
+//   return (
+//     <div className='flex justify-end w-full' >
+//         <DropdownMenu>
+//       <DropdownMenuTrigger asChild>
+//         <Button variant='outline'>Align Start</Button>
+//       </DropdownMenuTrigger>
+//       <DropdownMenuContent align='start' className='w-34'>
+//         <DropdownMenuGroup>
+//           <DropdownMenuItem>
+//             <PencilLineIcon />
+//             Edit
+//           </DropdownMenuItem>
+//           <DropdownMenuItem>
+//             <UploadIcon />
+//             Share
+//           </DropdownMenuItem>
+//           <DropdownMenuSeparator />
+//           <DropdownMenuItem variant='destructive'>
+//             <Trash2Icon />
+//             <span>Delete</span>
+//           </DropdownMenuItem>
+//         </DropdownMenuGroup>
+//       </DropdownMenuContent>
+//     </DropdownMenu>
+//     </div>
+//   )
+// }
+
+import { PencilLineIcon, UploadIcon, Trash2Icon } from 'lucide-react'
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuSeparator,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
+
+import { Button } from './ui/button'
 
 export default function Header() {
-  const { user } = useSelector((state) => state.userSlice);
-
   return (
-    <div className="bg-gray-200 px-5 flex justify-between  items-end py-2">
-      <h1 className="text-[30px] font-bold ">Shopal</h1>
+    <nav className="w-full bg-white shadow-md px-6 py-3 flex items-center justify-end">
+      {/* -------- Right: Your Dropdown (UNCHANGED CODE) -------- */}
+      <div >
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button >Button</Button>
+          </DropdownMenuTrigger>
 
+          <DropdownMenuContent align='start' className='w-34'>
+            <DropdownMenuGroup>
+              <DropdownMenuItem>
+                <PencilLineIcon />
+                Edit
+              </DropdownMenuItem>
 
-      {user ? <DropDownProfile user={user} /> : <div className="space-x-5">
-        <NavLink to={'/login'}>
-          <Button variant="link" className={'text-[16px]'}>Login</Button>
-        </NavLink>
-        <NavLink to={'/signup'}>
-          <Button>Sign Up</Button>
-        </NavLink>
+              <DropdownMenuItem>
+                <UploadIcon />
+                Share
+              </DropdownMenuItem>
 
-      </div>}
+              <DropdownMenuSeparator />
 
-    </div>
+              <DropdownMenuItem variant='destructive'>
+                <Trash2Icon />
+                <span>Delete</span>
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+
+    </nav>
   )
 }
-
 

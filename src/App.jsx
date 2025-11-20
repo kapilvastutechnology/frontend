@@ -1,11 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router"
 import RootLayout from "./components/RootLayout"
-import Home from "./features/home/Home"
-import Login from "./features/authentication/Login"
-import Register from "./features/authentication/Register"
-import AdminPanel from "./features/admin/AdminPanel"
-import ProductAddForm from "./features/admin/ProductAddForm"
-import ProductEdit from "./features/admin/ProductEdit"
+import Home from "./feature/home/Home"
+
 export default function App() {
 
   const router = createBrowserRouter([
@@ -18,32 +14,6 @@ export default function App() {
         element: <Home/>
        },
 
-       {
-        path: 'login',
-        element: <Login/>
-       },
-
-       {
-        path: 'signup',
-        element: <Register/>
-       },
-       
-       {
-        path: 'admin-panel',
-        element: <AdminPanel/>
-       },
-
-       {
-        path: 'product-add',
-        element: <ProductAddForm/>
-       },
-
-       {
-        path: 'product-edit/:id',
-        element: <ProductEdit/>
-       }
-
-       
       ]
     }
   ])
