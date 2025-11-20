@@ -1,5 +1,6 @@
 import { Card, CardHeader, CardTitle, CardFooter, CardContent } from '@/components/ui/card'
 import { useGetProductsQuery } from './productApi';
+import { base } from '@/app/mainApi';
 
 export default function ProductCard() {
   const { data, isLoading, isError, error } = useGetProductsQuery();
@@ -18,7 +19,7 @@ export default function ProductCard() {
           {/* FIXED IMAGE SECTION */}
           <div className="h-60 w-full overflow-hidden rounded-t-xl">
             <img
-              src={`http://localhost:5000/uploads/${product.image}`}
+              src={`${base}/${product.image}`}
               alt={product.title}
               className="w-full h-full object-cover"
             />
