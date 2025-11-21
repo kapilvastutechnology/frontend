@@ -63,6 +63,7 @@ export default function ProductEditForm({ product }) {
               title: product.title,
               detail: product.detail,
               price: product.price,
+              stock: product.stock,
               category: product.category,
               brand: product.brand,
               image: '',
@@ -75,6 +76,7 @@ export default function ProductEditForm({ product }) {
                 formData.append('title', val.title);
                 formData.append('detail', val.detail);
                 formData.append('price', val.price);
+                formData.append('stock', val.stock);
                 formData.append('category', val.category);
                 formData.append('brand', val.brand);
                 if (val.image){
@@ -135,6 +137,20 @@ export default function ProductEditForm({ product }) {
                     />
                     {touched.price && errors.price && <p className="text-red-500">{errors.price}</p>}
                   </div>
+
+
+                   <div className="grid gap-2">
+                      <Label htmlFor="stock">Stock</Label>
+                      <Input
+                      name="stock"
+                      onChange={handleChange}
+                      value={values.stock}
+                      id="stock"
+                      type="number"
+                      placeholder="product stock"
+                      />
+                      {touched.stock && errors.stock && <p className="text-red-500">{errors.stock}</p>} 
+                    </div>
 
                   <Select
                     name="category"

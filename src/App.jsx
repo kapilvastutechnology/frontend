@@ -6,6 +6,7 @@ import Register from "./features/authentication/Register"
 import AdminPanel from "./features/admin/AdminPanel"
 import ProductAddForm from "./features/admin/ProductAddForm"
 import ProductEdit from "./features/admin/ProductEdit"
+import ProductDetail from "./features/products/ProductDetail"
 export default function App() {
 
   const router = createBrowserRouter([
@@ -36,6 +37,11 @@ export default function App() {
        {
         path: 'product-add',
         element: <ProductAddForm/>
+       },
+
+       {
+        path: 'products/:id',
+        element: <ProductDetail/>
        },
 
        {

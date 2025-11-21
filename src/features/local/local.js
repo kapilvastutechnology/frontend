@@ -9,6 +9,15 @@ export const getUserFromLocal = () =>{
     return user ? JSON.parse(user) : null
 }
 
+export const setCartToLocal = (carts) => {
+    localStorage.setItem('carts',JSON.stringify(carts));
+}
+
+export const getCartFromLocal = () => {
+    const carts = localStorage.getItem('cart');
+    return carts ? JSON.parse(carts) : [];
+}
+
 
 export const removeUserFromLocal = () => {
     localStorage.clear();

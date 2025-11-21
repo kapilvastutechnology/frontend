@@ -29,6 +29,7 @@ const valSchema = Yup.object({
   title: Yup.string().min(4).required(),
   detail: Yup.string().min(10).required(),
   price: Yup.string().required(),
+  stock: Yup.string().required(),
   category: Yup.string().required(),
   brand: Yup.string().required(),
   image: Yup.mixed()
@@ -61,6 +62,7 @@ export default function ProductAddForm() {
               title: '',
               detail: '',
               price: '',
+              stock: '',
               category: '',
               brand: '',
               image: '',
@@ -73,6 +75,7 @@ export default function ProductAddForm() {
                 formData.append('title', val.title);
                 formData.append('detail', val.detail);
                 formData.append('price', val.price);
+                formData.append('stock', val.stock);
                 formData.append('category', val.category);
                 formData.append('brand', val.brand);
                 formData.append('image', val.image);
@@ -129,6 +132,20 @@ export default function ProductAddForm() {
                       placeholder="product price"
                     />
                     {touched.price && errors.price && <p className="text-red-500">{errors.price}</p>}
+                  </div>
+
+
+                  <div className="grid gap-2">
+                    <Label htmlFor="stock">Stock</Label>
+                    <Input
+                      name="stock"
+                      onChange={handleChange}
+                      value={values.stock}
+                      id="stock"
+                      type="number"
+                      placeholder="product stock"
+                    />
+                    {touched.stock && errors.stock && <p className="text-red-500">{errors.stock}</p>} 
                   </div>
 
                   <Select

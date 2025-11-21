@@ -1,14 +1,16 @@
 
 
 import { base } from '@/app/mainApi'
-import { Card, CardHeader, CardDescription, CardTitle, CardFooter, CardContent } from '@/components/ui/card'
-import { Badge } from 'lucide-react'
+import { Card, CardHeader, CardTitle, CardFooter, CardContent } from '@/components/ui/card'
+import { useNavigate } from 'react-router';
 
 export default function ProductCard({product}){
-
+const nav = useNavigate();
   return (
    
-    <div className=' hover:scale-[103%] ease-in delay-100 duration-75 transition  cursor-pointer 
+    <div
+    onClick={()=> nav(`/products/${product._id}`)}
+    className=' hover:scale-[103%] ease-in delay-100 duration-75 transition  cursor-pointer 
     relative  rounded-xl bg-linear-to-r from-neutral-600 to-violet-300 pt-0 shadow-lg'>
       <div className='flex h-70 items-center justify-center'>
         <img
