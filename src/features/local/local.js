@@ -9,7 +9,10 @@ export const getUserFromLocal = () =>{
     return user ? JSON.parse(user) : null
 }
 
-export const setCartToLocal = (carts) => {
+
+
+
+export const setCartsToLocal = (carts) => {
     localStorage.setItem('carts',JSON.stringify(carts));
 }
 

@@ -7,6 +7,7 @@ import AdminPanel from "./features/admin/AdminPanel"
 import ProductAddForm from "./features/admin/ProductAddForm"
 import ProductEdit from "./features/admin/ProductEdit"
 import ProductDetail from "./features/products/ProductDetail"
+import CheckOut from "./features/carts/CheckOut"
 export default function App() {
 
   const router = createBrowserRouter([
@@ -47,6 +48,11 @@ export default function App() {
        {
         path: 'product-edit/:id',
         element: <ProductEdit/>
+       },
+
+       {
+        path: 'checkout',
+        element:<CheckOut/>
        }
 
        
