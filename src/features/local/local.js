@@ -10,14 +10,12 @@ export const getUserFromLocal = () =>{
 }
 
 
-
-
 export const setCartsToLocal = (carts) => {
     localStorage.setItem('carts',JSON.stringify(carts));
 }
 
 export const getCartFromLocal = () => {
-    const carts = localStorage.getItem('cart');
+    const carts = localStorage.getItem('carts');
     return carts ? JSON.parse(carts) : [];
 }
 
