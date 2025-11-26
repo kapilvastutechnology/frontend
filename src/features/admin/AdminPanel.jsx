@@ -8,8 +8,6 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router";
 import { RemoveProduct } from "./RemoveProduct";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-
-
 export default function AdminPanel() {
   const nav = useNavigate();
   const { isLoading, error, data } = useGetProductsQuery();

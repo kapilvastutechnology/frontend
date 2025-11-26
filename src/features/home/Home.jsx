@@ -19,7 +19,7 @@ export default function Home() {
   return (
   <div>
       <h1>Welcome To Online Shop</h1>
-      <div className="grid grid-cols-4 gap-4 mt-4 items-start" >
+      <div className="grid grid-cols-4 gap-4 mt-8 items-start " >
         {data.products.map((product)=>{
         return <ProductCard key={product._id} product={product} />
       })}
