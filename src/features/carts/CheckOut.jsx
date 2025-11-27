@@ -85,7 +85,7 @@ export default function CheckOut() {
                       </div>
 
                     </TableCell>
-                    <TableCell>Rs. {item.price}</TableCell>
+                    <TableCell>Rs. {item.price * item.qty}</TableCell>
                     <TableCell className='flex items-center gap-1'>
                       <AlertDialog>
                         <AlertDialogTrigger asChild>
@@ -116,8 +116,27 @@ export default function CheckOut() {
               </TableBody>
             </Table>
           </div>
-
         </div>
+
+        <div className='flex items-center flex-col'>
+                <h2>Order Summary</h2>
+        <div className='space-y-4 mt-6' >
+          {carts.map((item)=>{
+            return <div> 
+              <div className='flex justify-between gap-14'>
+                <span>{item.title}</span>
+                  <span> {item.qty} X Rs.{item.price}</span>
+              </div>
+            </div>
+          })}
+            <p>Total items: {carts.length}</p>
+          <div>
+            <p>Total Price: Rs. {carts.reduce((total, item) =>
+                total + item.price * item.qty, 0 )}</p>
+          </div>
+        </div>
+        <Button className={'mt-9 px09 bg-green-700'} >Checkout</Button>
+          </div>
       </div>
     </div>
   )
