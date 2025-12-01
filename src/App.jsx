@@ -8,6 +8,7 @@ import ProductAddForm from "./features/admin/ProductAddForm"
 import ProductEdit from "./features/admin/ProductEdit"
 import ProductDetail from "./features/products/ProductDetail"
 import CheckOut from "./features/carts/CheckOut"
+import UserProfile from "./features/profile/UserProfile"
 export default function App() {
 
   const router = createBrowserRouter([
@@ -28,6 +29,10 @@ export default function App() {
        {
         path: 'signup',
         element: <Register/>
+       },
+       {
+        path: 'profile',
+        element:<UserProfile/>
        },
        
        {
