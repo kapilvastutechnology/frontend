@@ -1,14 +1,12 @@
 import { MinusIcon, PlusIcon, Trash2Icon } from 'lucide-react'
-// import { AvatarImage, Avatar, AvatarFallback } from '../../components/ui/avatar'
-// import { Table, TableBody, TableHead, TableCell, TableRow, TableHeader } from '../../components/ui/table'
 import { useDispatch, useSelector } from 'react-redux';
 import { removeCart, setCart } from './cartSlice';
-import CheckOutPart from './CheckOutPart';
 import { Button } from '@/components/ui/button';
 import { base } from '@/app/mainApi';
 import ShowDialog from '@/components/ShowDialog';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import CheckOutPart from './CheckOutPart';
 
 export default function CheckOut() {
   const { carts } = useSelector((state) => state.cartSlice);

@@ -1,5 +1,4 @@
 import { MinusIcon, PlusIcon } from "lucide-react";
-
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCart } from "./cartSlice";
@@ -44,7 +43,7 @@ export default function AddToCart({ product }) {
 
       </div>
 
-      <Button disabled={user?.role === 'admin' || !user} onClick={handleCart} 
+      <Button disabled={user?.role === 'admin' || !user } onClick={handleCart} 
       size="lg" className={'bg-green-600'}>Add To Cart</Button>
 
     </div>

@@ -26,14 +26,13 @@ export default function CheckOutPart({ carts }) {
 
       }).unwrap();
       dispatch(clearCart());
-
       toast.success('Order placed successfully');
     } catch (err) {
       toast.error(err.data.message);
     }
   }
   return (
-    <div className='flex items-center flex-col '>
+    <div className='flex items-center flex-col'>
       <h2>Order Summary</h2>
 
       <div className='space-y-4 mt-6'>
