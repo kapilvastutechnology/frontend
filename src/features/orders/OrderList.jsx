@@ -1,5 +1,4 @@
 import { useGetOrdersQuery } from "./orderApi";
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { useNavigate } from "react-router";
@@ -8,6 +7,7 @@ export default function OrderList({user}) {
   const nav = useNavigate();
   if (isLoading) return <h1>Loading...</h1>;
   if (error) return <h1 className="text-pink-500" >{error?.error || error.data?.message}</h1>;
+  console.log(data);
   return (
     <div>
       <div className='w-full'>
@@ -26,7 +26,7 @@ export default function OrderList({user}) {
                 <TableCell>{item._id}</TableCell>
                 <TableCell>{item.totalAmount}</TableCell>
                 <TableCell>
-                  <Button onClick={() => nav(`/orders/${item._id}`)} >View More</Button>
+                  <Button onClick={() => nav(`/order/${item._id}`)} >View More</Button>
                 </TableCell>
               </TableRow>
             ))}
