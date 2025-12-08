@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router"
 import RootLayout from "./components/RootLayout"
-import Home from "./features/home/Home"
+
 import Login from "./features/authentication/Login"
 import Register from "./features/authentication/Register"
 import AdminPanel from "./features/admin/AdminPanel"
@@ -10,6 +10,7 @@ import ProductDetail from "./features/products/ProductDetail"
 import CheckOut from "./features/carts/CheckOut"
 import UserProfile from "./features/profile/UserProfile"
 import Order from "./features/orders/Order"
+import Home from "./features/home/Home"
 export default function App() {
 
   const router = createBrowserRouter([

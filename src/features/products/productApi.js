@@ -5,19 +5,20 @@ export const  productApi = mainApi.injectEndpoints({
         getProduct: builder.query({
             query: (id) => ({
                 url: `/products/${id}`,
-                method: 'GET'
+                method: 'GET',
             }),
             providesTags: ['Product']
         }),
 
 
-        getProducts: builder.query({
-            query: () => ({
-                url: '/products',
-                method: 'GET'
-            }),
-            providesTags: ['Product']
-        }),
+     getProducts: builder.query({
+      query: (query) => ({
+        url: '/products',
+        method: 'GET',
+        params: query
+      }),
+      providesTags: ['Product']
+    }),
 
         createProduct: builder.mutation({
             query: (data) => ({
