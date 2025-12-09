@@ -73,7 +73,7 @@ export default function Home() {
           )}
         </Formik>
 
-
+          {data.products.length === 0 && <h1 className="text-pink-500">No Product Found</h1>}
 
         <div className="grid grid-cols-4 gap-6 mt-4 items-start">
           {data.products.map((product) => {
