@@ -1,5 +1,4 @@
 import { Formik } from "formik";
-
 import { useSearchParams } from "react-router";
 import { useEffect } from "react";
 import { useGetProductsQuery } from "../products/productApi";
@@ -10,7 +9,6 @@ import { Input } from "@/components/ui/input";
 
 export default function Home() {
   const [params, setPrams] = useSearchParams();
-
   const querYPage = params.get('page') ?? 1;
 
   const query = params.get('search') ? {
@@ -91,9 +89,6 @@ export default function Home() {
         <h1>{params.get('page') ?? 1}</h1>
         <Button onClick={() => setPrams({ page: Number(querYPage) + 1 })} disabled={data.totalPages === Number(querYPage)}>Next</Button>
       </div>
-
-
-
 
     </div>
   )
