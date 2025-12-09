@@ -6,7 +6,7 @@ export const base = 'https://dev-anuj.onrender.com/';
 export const mainApi = createApi({
     reducerPath: 'mainApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://dev-anuj.onrender.com/',
+        baseUrl: 'https://dev-anuj.onrender.com/api',
     }),
     endpoints: (builder) => ({}),
 });
