@@ -3,8 +3,12 @@ import { useGetProductQuery } from "./productApi";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { base } from "@/app/mainApi";
 import AddToCart from "../carts/AddToCart";
+import ReviewForm from "../reviews/ReviewForm";
+import ReviewList from "../reviews/ReviewList";
+import { useSelector } from "react-redux";
 
 export default function ProductDetail() {
+    const { user } = useSelector((state) => state.userSlice);
     const {id} = useParams();
     const {isLoading, error, data} = useGetProductQuery(id);
     if (isLoading) return <DotLottieReact
@@ -14,6 +18,7 @@ export default function ProductDetail() {
     />
     if (error) return <h3 className="text-pink-500" >{error.data?.message}</h3>;
     return (
+        <div>
         <div className=" mx-w-7xl max-auto
          grid grid-cols-2 mt-11 gap-10" >
             <div>
@@ -31,6 +36,14 @@ export default function ProductDetail() {
                 </div>
             </div>
 
+        </div>
+
+        <div className="p-5 mt-4">
+        {user &&  user.role === 'user' &&
+         <ReviewForm id={id} user={user}/>}
+        <ReviewList/>
+        </div>
+        
         </div>
     )
 }
