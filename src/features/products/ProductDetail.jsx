@@ -39,8 +39,11 @@ export default function ProductDetail() {
         </div>
 
         <div className="p-5 mt-4">
-        {user &&  user.role === 'user' &&
-         <ReviewForm id={id} user={user}/>}
+        {/* {user &&  user.role === 'user' &&
+         <ReviewForm id={id} user={user}/>} */}
+
+         {user && user.role === 'user' && <ReviewForm id={id} user={user} />}
+
         <ReviewList/>
         </div>
         
